@@ -16,7 +16,6 @@ const App = () => {
       </div>
       <div className='main-container'>
         <div className='sidenav-container' >
-          <a href='https://www.youtube.com/'>click me</a>
         </div>
         <div className='app-content'>
           <Outlet />
