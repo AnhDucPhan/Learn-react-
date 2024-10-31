@@ -1,4 +1,4 @@
-.green{
+.green {
   border: 1px solid green;
 }
 
@@ -12,4 +12,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-
+.app-container {
+  .header-container {
+    .navbar-nav {
+      .nav-link {
+        &.active {
+          color: red
+        }
+      }
+    }
+  }
+}
