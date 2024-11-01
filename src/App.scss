@@ -12,14 +12,82 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media (min-width: 1800px) {
+
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl,
+  .container-xxl {
+    max-width: 1740px !important;
+  }
+}
+
 .app-container {
   .header-container {
-    .navbar-nav {
+    .btn-login {
+      border-radius: 5px;
+      padding: 12px 25px;
+      margin-right: 25px;
+      border: solid 1px #828282;
+    }
+
+    .btn-signup {
+      border-radius: 5px;
+      padding: 12px 20px;
+      background-color: black;
+      color: white;
+      margin-right: 25px;
+
+      &:hover {
+        background: rgb(46, 46, 46);
+      }
+    }
+
+    .navbar {
+      padding-top: 20px;
       z-index: 10;
-      opacity: 0.6;
+      color: rgba(0, 0, 0, 0) !important;
+
       .nav-link {
         &.active {
           color: #0866ff
+        }
+      }
+    }
+  }
+
+  .homepage-container {
+    .homepage-content {
+      position: relative;
+      padding: 0 100px;
+      margin-top: 125px;
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+
+      .text-homepage-one {
+        font-size: 60px;
+      }
+
+      .text-homepage-two {
+        font-size: 30px;
+      }
+
+      .button-homepage {
+        button {
+          font-size: 30px;
+          border-radius: 5px;
+          padding: 12px 20px;
+          background-color: black;
+          color: white;
+          margin-right: 25px;
+
+          &:hover {
+            background: rgb(46, 46, 46);
+          }
         }
       }
     }
