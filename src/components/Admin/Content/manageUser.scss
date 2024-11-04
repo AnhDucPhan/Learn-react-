@@ -1,16 +1,24 @@
 .manage-user-container {
-    .title {}
+    padding: 10px;
+    .title {
+        font-weight: 600;
+        font-size: 20px;
+    }
 
     .user-content {
-        .btn-add-user {}
+        .btn-add-user {
+            margin: 15px 0;
+        }
 
+        .table-user-container{
+
+        }
 
     }
 }
 
 .modal-add-user {
     .img-preview {
-        border: 1px solid green;
         height: 150px;
         border: 1px dashed #ccc;
         border-radius: 10px;
