@@ -67,23 +67,18 @@ const ModalUpdateUser = (props) => {
             toast.error('invalid email')
             return;
         }
-
-
-
-
         let data = await putUpdateUser(dataUpdate.id, username, role, image)
 
         if (data && data.EC === 0) {
             toast.success(data.EM)
-            await props.fetchListUser();
+            // await props.fetchListUser();
+            // props.setCurrentPage(1);
+            await props.fetchListUserWithPaginate(props.currentPage);
             return handleClose();
         } if (data && data.EC !== 0) {
             toast.error(data.EM)
         }
     }
-
-    console.log('check props data>>>', props.dataUpdate)
-
 
     return (
         <>
