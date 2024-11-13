@@ -1,4 +1,4 @@
-.login-container {
+.register-container {
     .header {
         height: 45px;
         text-align: right;
@@ -7,7 +7,7 @@
         button {
             padding: 3px 15px;
             margin-left: 15px;
-            border-radius: 5px;
+            border-radius: 7px;
             background-color: white;
             border: 1px solid;
 
@@ -30,6 +30,17 @@
     }
 
     .content-form {
+
+        .pass-group {
+            position: relative;
+
+            .icon-eye {
+                position: absolute;
+                right: 10px;
+                bottom: 10px;
+                cursor: pointer;
+            }
+        }
 
         input {
             margin-bottom: 15px;

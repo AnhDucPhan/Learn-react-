@@ -26,7 +26,7 @@ const Header = (props) => {
                         <Nav.Link to="/users">User</Nav.Link> */}
                     </Nav>
                     <button className='btn-login' onClick={() => handleLogin()}>Log In</button>
-                    <button className='btn-signup'>Sign Up</button>
+                    <button className='btn-signup' onClick={()=>{navigate('/register')}}>Sign Up</button>
                     {/* <Nav>
                         <NavDropdown title="Setting" id="basic-nav-dropdown">
                             <NavDropdown.Item >Log In</NavDropdown.Item>

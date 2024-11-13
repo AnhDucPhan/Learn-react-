@@ -1,13 +1,17 @@
 import { useState } from 'react';
-import './login.scss';
-import { useNavigate } from 'react-router-dom';
-import { postLogin } from '../../../service/apiService';
+import './register.scss';
+import { Link, useNavigate } from 'react-router-dom';
+import { postRegister } from '../../../service/apiService';
 import { toast } from 'react-toastify';
+import { FaEyeSlash } from "react-icons/fa";
+import { IoEyeSharp } from "react-icons/io5";
 
-const Login = (props) => {
+const Register = (props) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [username, setUserName] = useState('')
+    const [isShowHidePassword, setShowHidePassword] = useState(false)
     const navigate = useNavigate();
 
     const validateEmail = (email) => {
@@ -17,8 +21,8 @@ const Login = (props) => {
                 /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
             );
     };
-    const handleLogin = async () => {
-        // validate
+    const handleCreateAccountUser = async () => {
+        //validate
         const isValidEmail = validateEmail(email)
 
         if (!isValidEmail) {
@@ -30,10 +34,10 @@ const Login = (props) => {
             return;
         }
 
-        let data = await postLogin(email, password);
+        let data = await postRegister(email, password, username);
         if (data && data.EC === 0) {
             toast.success(data.EM)
-            navigate('/')
+            navigate('/login')
         } if (data && data.EC !== 0) {
             toast.error(data.EM)
         }
@@ -41,36 +45,55 @@ const Login = (props) => {
 
 
     return (
-        <div className="login-container">
+        <div className="register-container">
             <div className='header'>
                 <span>
-                    Don't have an account yet?
+                    Already have an account?
                 </span>
-                <button onClick={() => { navigate('/register') }}>Sign Up</button>
+                <button onClick={() => { navigate('/login') }}>Log In</button>
             </div>
-            <div className='title col-4 mx-auto'>AnhDuc</div>
-            <div className='welcome col-4 mx-auto'>Hello, Who is this</div>
+            <div className='title col-4 mx-auto'>AnhDuc & Friends</div>
+            <div className='welcome col-4 mx-auto'>Start your journey?</div>
             <div className='content-form col-4 mx-auto'>
                 <div className='form-group'>
-                    <label>Email</label>
+                    <label>Email(*)</label>
                     <input
                         type={'email'}
                         className='form-control'
                         value={email}
                         onChange={(event) => setEmail(event.target.value)} />
                 </div>
-                <div className='form-group'>
-                    <label>Password</label>
+                <div className='form-group pass-group'>
+                    <label>Password(*)</label>
                     <input
-                        type={'password'}
+                        type={isShowHidePassword ? 'text' : 'password'}
                         className='form-control'
                         value={password}
                         onChange={(event) => setPassword(event.target.value)} />
+                    {isShowHidePassword ?
+                        <span className='icon-eye'
+                            onClick={() => setShowHidePassword(false)}>
+                            <FaEyeSlash />
+                        </span>
+                        :
+                        <span className='icon-eye' onClick={() => setShowHidePassword(true)}>
+                            <IoEyeSharp />
+                        </span>
+                    }
+
+                </div>
+                <div className='form-group'>
+                    <label>Username</label>
+                    <input
+                        type={Text}
+                        className='form-control'
+                        value={username}
+                        onChange={(event) => setUserName(event.target.value)} />
                 </div>
                 <span className='forgot-password'>forgot your password?</span>
                 <div>
                     <button className='btn-login'
-                        onClick={() => handleLogin()}>Login</button>
+                        onClick={() => handleCreateAccountUser()}>Create my free account</button>
                 </div>
                 <div className='back text-center'>
                     <span onClick={() => { navigate('/') }}>
@@ -83,4 +106,4 @@ const Login = (props) => {
     )
 }
 
-export default Login;
+export default Register;
