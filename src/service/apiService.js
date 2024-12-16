@@ -1,3 +1,4 @@
+import { delay } from 'lodash';
 import axios from '../utils/axiosCustomize';
 
 
@@ -35,11 +36,29 @@ const getUserWithPaginate = (page, limit) => {
 }
 
 const postLogin = (email, password) => {
-    return axios.post(`api/v1/login`, { email: email, password: password });
+    return axios.post(`api/v1/login`, { email: email, password: password, delay: 2000 });
 }
 
 const postRegister = (email, password, username) => {
     return axios.post(`api/v1/register`, { email, password, username });
 }
 
-export { PostCreateNewUser, getAllUser, putUpdateUser, deleteUser, getUserWithPaginate, postLogin, postRegister };
+const getQuizByUser = () => {
+    return axios.get('api/v1/quiz-by-participant')
+}
+
+const getDataQuiz = (quizId) => {
+    return axios.get(`api/v1/questions-by-quiz?quizId=${quizId}`)
+}
+
+const postSubmitQuiz = (data) => {
+    console.log('check copy data: ', { ...data })
+    return axios.post(`api/v1/quiz-submit`, { ...data })
+}
+
+export {
+    PostCreateNewUser, getAllUser, putUpdateUser,
+    deleteUser, getUserWithPaginate, postLogin,
+    postRegister, getQuizByUser, getDataQuiz,
+    postSubmitQuiz
+};

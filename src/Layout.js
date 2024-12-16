@@ -9,8 +9,17 @@ import Login from './components/Admin/Auth/login';
 import { Bounce, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Register from './components/Admin/Auth/register';
+import ListQuiz from './components/User/listQuiz';
+import DetailQuiz from './components/User/detailQuiz';
+import ManageQuiz from './components/Admin/Quiz/manageQuiz';
 
-
+const NotFound = () => {
+    return (
+        <div className='container mt-3 alert alert-danger'>
+            Not Found Your URL ERROR 404
+        </div>
+    )
+}
 
 
 const Layout = (props) => {
@@ -19,14 +28,17 @@ const Layout = (props) => {
             <Routes>
                 <Route path='/' element={<App />}>
                     <Route index element={<HomePage />} />
-                    <Route path='users' element={<User />} />
+                    <Route path='user' element={<ListQuiz />} />
                 </Route>
+                <Route path='/quiz/:id' element={<DetailQuiz />} />
                 <Route path='/admins' element={<Admin />}>
                     <Route index element={<Dashboard />} />
                     <Route path='manage-users' element={<UserManage />} />
+                    <Route path='manage-quizzes' element={<ManageQuiz />} />
                 </Route>
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
+                <Route path='*' element={<NotFound />} />
             </Routes>
             <ToastContainer
                 position="top-right"

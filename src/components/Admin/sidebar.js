@@ -14,10 +14,11 @@ import sidebarBg from '../../assets/bg2.jpg';
 import { DiReact } from 'react-icons/di'
 import { MdDashboard } from 'react-icons/md'
 import './sidebar.scss'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const SideBar = ({ image, collapsed, toggled, handleToggleSidebar }) => {
+    const navigate = useNavigate();
     return (
         <>
             <ProSidebar
@@ -41,7 +42,10 @@ const SideBar = ({ image, collapsed, toggled, handleToggleSidebar }) => {
                         }}
                     >
                         <DiReact size={'3em'} color={'00bfff'} />
-                        <span>AnhDuc and React</span>
+                        <span onClick={() => navigate('/')}>
+                            {/* <Link to='/'>AnhDuc and React</Link> */}
+                            AnhDuc and React
+                        </span>
                     </div>
                 </SidebarHeader>
 
@@ -64,7 +68,7 @@ const SideBar = ({ image, collapsed, toggled, handleToggleSidebar }) => {
                             title='Features'
                         >
                             <MenuItem>User Manage <Link to='manage-users' /></MenuItem>
-                            <MenuItem>QuizTest Manage</MenuItem>
+                            <MenuItem>QuizTest Manage <Link to='manage-quizzes' /></MenuItem>
                             <MenuItem>Question Manage</MenuItem>
                         </SubMenu>
                     </Menu>
