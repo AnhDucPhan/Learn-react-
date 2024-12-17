@@ -1,14 +1,19 @@
 .quiz-container {
-    padding: 15px;
+    // padding: 15px;
 
     .title {
         font-size: 30px;
         font-weight: 600;
     }
 
-    legend{
+    legend {
         font-size: 19px;
     }
 
     .add-new {}
+
+    .list-detail {
+        padding: 15px;
+
+    }
 }
