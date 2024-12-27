@@ -5,6 +5,8 @@ import { postCreateNewQuiz } from '../../../service/apiService'
 import { toast } from 'react-toastify';
 import TableQuiz from './tableQuiz';
 import { Accordion } from 'react-bootstrap';
+import { getAllQuizForAdmin } from '../../../service/apiService'
+
 
 
 const ManageQuiz = (props) => {
