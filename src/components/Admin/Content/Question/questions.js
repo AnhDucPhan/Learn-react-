@@ -7,7 +7,13 @@ import { RiImageAddFill } from 'react-icons/ri'
 import { v4 as uuidv4 } from 'uuid';
 import _ from 'lodash'
 import Lightbox from "react-awesome-lightbox";
-import { getAllQuizForAdmin, postCreateNewQuestionForQuiz, postCreateNewAnswerForQuestion } from '../../../../service/apiService'
+import {
+    getAllQuizForAdmin,
+    postCreateNewQuestionForQuiz,
+    postCreateNewAnswerForQuestion
+} from '../../../../service/apiService'
+import { toast } from 'react-toastify';
+
 
 
 const Questions = (props) => {
@@ -160,15 +166,64 @@ const Questions = (props) => {
 
     //lưu câu hỏi và câu trả lời 
     const handleSaveQuestionForQuiz = async () => {
+        //validate quiz
+        if (_.isEmpty(selectedQuiz)) {
+            toast.error('please choose a quiz test')
+        }
+
+        //validate answer
+        let validAnswer = true;
+        let indexQ = 0, indexA = 0;
+        for (let i = 0; i < questions.length; i++) {
+            for (let j = 0; j < questions[i].answers.length; j++) {
+                if (!questions[i].answers[j].description) {
+                    validAnswer = false;
+                    indexA = j
+                    break;
+                }
+            }
+            indexQ = i;
+            if (validAnswer === false)
+                break;
+
+        }
+        if (validAnswer === false) {
+            toast.error(`Empty answer ${indexA + 1} at question ${indexQ + 1}`)
+            return;
+        }
+
+        //validate
+        let validQuestion = true;
+        let indexQuestion = 0;
+        for (let i = 0; i < questions.length; i++) {
+            if (!questions[i].description) {
+                validQuestion = false
+                indexQuestion = i
+                break;
+            }
+            
+        }
+        if (validQuestion === false) {
+            toast.error(`Empty question ${indexQuestion + 1}`)
+            return;
+        }
+
+        
         //lưu câu hỏi vào api
-        await Promise.all(questions.map(async (question) => {
-            const q = await postCreateNewQuestionForQuiz(+selectedQuiz.value, question.description, question.imageFile)
-            //lưu câu trả lời vào api
-            await Promise.all(question.answers.map(async (answer) => {
-                const a = await postCreateNewAnswerForQuestion(answer.description, answer.isCorrect, q.DT.id)
-            }))
-            console.log('check q: ', q)
-        }))
+        for (const question of questions) {
+            const q = await postCreateNewQuestionForQuiz(
+                +selectedQuiz.value,
+                question.description,
+                question.imageFile)
+            //lưu câu trả lời 
+            for (const answer of question.answers) {
+                await postCreateNewAnswerForQuestion(
+                    answer.description,
+                    answer.isCorrect,
+                    q.DT.id)
+            }
+
+        }
 
     }
 
